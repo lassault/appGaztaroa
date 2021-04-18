@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import Calendario from './CalendarioComponent';
+import DetalleExcursion from './DetalleExcursionComponent';
 import { EXCURSIONES } from '../comun/excursiones';
 
 class Campobase extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
-            excursiones: EXCURSIONES
+            excursiones: EXCURSIONES,
+            seleccionExcursion: null
         }
     };
+
+    onSeleccionExcursion (excursionId) {
+        this.setState({ seleccionExcursion: excursionId })
+    }
 
     render() {
 
         return (
-            <Calendario excursiones={this.state.excursiones} />
+            <View>
+                <DetalleExcursion excursion={this.state.excursiones.filter((excursion) => excursion.id === this.state.seleccionExcursion)[0]} />
+                <Calendario excursiones={this.state.excursiones} onPress={(excursionId) => this.onSeleccionExcursion(excursionId)} />
+            </View>
         );
     }
 }

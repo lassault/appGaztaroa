@@ -1,13 +1,17 @@
 import React from 'react';
 import { ListItem, Avatar } from 'react-native-elements';
 import { SafeAreaView, FlatList } from 'react-native';
+import { Text, View } from 'react-native';
 
 function Calendario (props) {
 
     const renderCalendarioItem = ({ item, index }) => {
         return (
-            <ListItem key={index} bottomDivider>
-                <Avatar source={require('../assets/40Años.png')} />
+            <ListItem 
+            key={index} bottomDivider
+            onPress={() => props.onPress(item.id)}
+            bottomDivider>
+            <Avatar source={require('../assets/40Años.png')} />
                 <ListItem.Content>
                     <ListItem.Title>{item.nombre}</ListItem.Title>
                     <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
