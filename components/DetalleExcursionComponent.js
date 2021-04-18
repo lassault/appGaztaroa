@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
+import { exp } from 'react-native-reanimated';
+import { EXCURSIONES } from '../comun/excursiones';
 
 function RenderExcursion (props) {
 
@@ -12,22 +14,32 @@ function RenderExcursion (props) {
                 <Card.Title>{excursion.nombre}</Card.Title>
                 <Card.Divider />
                 <Card.Image source={require('../assets/40Años.png')}></Card.Image>
-                <Text style={{margin: 20}}>
+                <Text 
+                    style={{
+                        margin: 20
+                    }}
+                >
                     {excursion.descripcion}
                 </Text>
             </Card>
-        );
-    } else {
-        return(
-            <View></View>
-        );
+        )
     }
 }
 
-function DetalleExcursion (props) {
-    return (
-        <RenderExcursion excursion={props.excursion} />
-    );
+class DetalleExcursion extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            excursiones: EXCURSIONES
+        };
+    }
+
+    render() {
+        const {excursionId} = this.props.route.params;
+        return (
+            <RenderExcursion excursion={this.state.excursiones[+excursionId]} />
+        );
+    }
 }
 
 export default DetalleExcursion;
