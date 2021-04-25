@@ -4,6 +4,7 @@ import { Card } from 'react-native-elements';
 import { CABECERAS } from '../comun/cabeceras';
 import { ACTIVIDADES } from '../comun/actividades';
 import { EXCURSIONES } from '../comun/excursiones';
+import { baseUrl } from '../comun/comun';
 
 function RenderItem (props) {
 
@@ -12,7 +13,7 @@ function RenderItem (props) {
     if (item != null) {
         return (
             <Card>
-                <Card.Image source={require('../assets/40Años.png')}></Card.Image>
+                <Card.Image source={{uri: baseUrl + item.imagen}}></Card.Image>
                 <Text style={{
                     top: -150,
                     fontSize: 25,
