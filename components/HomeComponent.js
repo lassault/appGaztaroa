@@ -23,7 +23,7 @@ function RenderItem (props) {
                     {item.nombre}
                 </Text>
                 <Text style={{
-                    margin: 20
+                    margin: 5
                 }}>
                     {item.descripcion}
                 </Text>
