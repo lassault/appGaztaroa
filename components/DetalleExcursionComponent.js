@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
-import { exp } from 'react-native-reanimated';
 import { EXCURSIONES } from '../comun/excursiones';
 
 function RenderExcursion (props) {
