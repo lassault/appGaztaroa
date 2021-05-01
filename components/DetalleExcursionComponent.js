@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
-import { EXCURSIONES } from '../comun/excursiones';
-import { COMENTARIOS } from '../comun/comentarios';
-import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import { baseUrl } from '../comun/comun';
+
+const mapStateToProps = state => {
+    return {
+        comentarios: state.comentarios,
+        excursiones: state.excursiones
+    }
+}
 
 function RenderExcursion (props) {
 
@@ -34,6 +38,10 @@ function RenderExcursion (props) {
                 />
             </Card>
         )
+    } else {
+        return(
+            <View></View>
+        );
     }
 }
 
@@ -75,8 +83,6 @@ class DetalleExcursion extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            excursiones: EXCURSIONES,
-            comentarios: COMENTARIOS,
             favoritos: []
         };
     }
@@ -90,16 +96,16 @@ class DetalleExcursion extends Component {
         return (
             <ScrollView>
                 <RenderExcursion
-                    excursion={this.state.excursiones[+excursionId]}
+                    excursion={this.props.excursiones.excursiones[+excursionId]}
                     favorita={this.state.favoritos.some(el => el === excursionId)}
                     onPress={() => this.marcarFavorito(excursionId)}
                 />
                 <RenderComentario
-                    comentarios={this.state.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
+                    comentarios={this.props.comentarios.comentarios.filter((comentario) => comentario.excursionId === excursionId)}
                 />
             </ScrollView>
         );
     }
 }
 
-export default DetalleExcursion;
+export default connect(mapStateToProps)(DetalleExcursion);

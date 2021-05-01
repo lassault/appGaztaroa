@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
 import Constants from 'expo-constants';
+
+import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
+import { fetchCabeceras, fetchActividades, fetchExcursiones, fetchComentarios } from '../redux/ActionCreators';
 import Home from './HomeComponent';
 import Calendario from './CalendarioComponent';
 import DetalleExcursion from './DetalleExcursionComponent';
 import Contacto from './ContactoComponent';
 import QuienesSomos from './QuienesSomosComponent';
 
-const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
-
-function CustomDrawerContent (props) {
-    
-    return (
-        <DrawerContentScrollView {...props}>
-            <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
-                <View style={styles.drawerHeader}>
-                    <View style={{ flex: 1 }}>
-                        <Image source={require('../assets/logo.png')} style={styles.drawerImage} />
-                    </View>
-                    <View style={{ flex: 2 }}>
-                        <Text style={styles.drawerHeaderText}> Gaztaroa</Text>
-                    </View>
-                </View>
-                <DrawerItemList {...props} />
-            </SafeAreaView>
-        </DrawerContentScrollView>
-    );
+const mapStateToProps = state => {
+    return {
+        excursiones: state.excursiones,
+        comentarios: state.comentarios,
+        cabeceras: state.cabeceras,
+        actividades: state.actividades
+    }
 }
+
+const mapDispatchToProps = dispatch => ({
+    fetchCabeceras: () => dispatch(fetchCabeceras()),
+    fetchActividades: () => dispatch(fetchActividades()),
+    fetchExcursiones: () => dispatch(fetchExcursiones()),
+    fetchComentarios: () => dispatch(fetchComentarios())
+})
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function DrawerNavegador() {
     return (
@@ -94,6 +94,25 @@ function DrawerNavegador() {
             />
         </Drawer.Navigator>
     )
+}
+
+function CustomDrawerContent (props) {
+    
+    return (
+        <DrawerContentScrollView {...props}>
+            <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+                <View style={styles.drawerHeader}>
+                    <View style={{ flex: 1 }}>
+                        <Image source={require('../assets/logo.png')} style={styles.drawerImage} />
+                    </View>
+                    <View style={{ flex: 2 }}>
+                        <Text style={styles.drawerHeaderText}> Gaztaroa</Text>
+                    </View>
+                </View>
+                <DrawerItemList {...props} />
+            </SafeAreaView>
+        </DrawerContentScrollView>
+    );
 }
 
 function HomeNavegador({ navigation }) {
@@ -197,6 +216,13 @@ function ContactoNavegador({ navigation }) {
 
 class Campobase extends Component {
 
+    componentDidMount() {
+        this.props.fetchCabeceras();
+        this.props.fetchActividades();
+        this.props.fetchExcursiones();
+        this.props.fetchComentarios();
+    }
+
     render() {
 
         return (
@@ -237,4 +263,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Campobase;
+export default connect(mapStateToProps, mapDispatchToProps)(Campobase);
