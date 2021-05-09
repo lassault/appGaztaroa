@@ -1,3 +1,3 @@
-export const baseUrl = 'http://X.X.X.X:XX/'
+export const baseUrl = 'http://XX.XX.XX.XX:XXXX/'
 export const colorGaztaroaOscuro = '#015afc';
 export const colorGaztaroaClaro = '#c2d3da';

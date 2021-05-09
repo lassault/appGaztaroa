@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList } from 'react-native';
+import { Text, View, ScrollView, FlatList, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../comun/comun';
@@ -18,7 +18,21 @@ function RenderExcursion (props) {
     if (excursion != null) {
         return (
             <Card>
-                <Card.Title>{excursion.nombre}</Card.Title>
+                <Card.Image source={{uri: baseUrl + excursion.imagen}}>
+                    <Card.Title style={StyleSheet.cardTitleStyle}>{excursion.nombre}</Card.Title>
+                </Card.Image>
+                <Text style={{margin: 20}}>
+                    {excursion.descripcion}
+                </Text>
+                <Icon
+                    raised
+                    reverse
+                    name={props.favorita ? 'heart' : 'heart-o'}
+                    type='font-awesome'
+                    color='#f50'
+                    onPress={() => props.favorita ? console.log('La excursión ya se encuentra entre las favoritas') : props.onPress()}
+                />
+                {/*<Card.Title>{excursion.nombre}</Card.Title>
                 <Card.Divider />
                 <Card.Image source={{uri: baseUrl + excursion.imagen}}></Card.Image>
                 <Text 
@@ -35,7 +49,7 @@ function RenderExcursion (props) {
                     type='font-awesome'
                     color='#f50'
                     onPress={() => props.favorita ? console.log('La excursion ya se encuentra entre las favoritas') : props.onPress()}
-                />
+                />*/}
             </Card>
         )
     } else {
@@ -107,5 +121,16 @@ class DetalleExcursion extends Component {
         );
     }
 }
+
+const style = StyleSheet.create({
+    cardTitleStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50
+    }
+})
 
 export default connect(mapStateToProps)(DetalleExcursion);
