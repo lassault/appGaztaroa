@@ -4,6 +4,8 @@ import { Card, ListItem, Avatar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../comun/comun';
 
+import { IndicadorActividad } from './IndicadorActividadComponent';
+
 const mapStateToProps = state => {
     return {
         actividades: state.actividades
@@ -46,20 +48,42 @@ class QuienesSomos extends Component {
             );
         }
 
-        return (
-            <ScrollView>
-                <Historia />
-                <Card>
-                    <Card.Title>Actividades y recursos</Card.Title>
-                    <Card.Divider />
-                    <FlatList
-                        data={this.props.actividades.actividades}
-                        renderItem={renderActividadItem}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                </Card>
-            </ScrollView>
-        )
+        if (this.props.actividades.isLoading) {
+            return (
+                <ScrollView>
+                    <Historia />
+                    <Card title='Actividades y recursos'>
+                        <IndicadorActividad />
+                    </Card>
+                </ScrollView>
+            );
+        } else if (this.props.actividades.isLoading) {
+            return (
+                <ScrollView>
+                    <Historia />
+                    <Card title='Actividades y recursos'>
+                        <Text>
+                            {this.props.excursiones.errMess}
+                        </Text>
+                    </Card>
+                </ScrollView>
+            );
+        } else {
+            return (
+                <ScrollView>
+                    <Historia />
+                    <Card>
+                        <Card.Title>Actividades y recursos</Card.Title>
+                        <Card.Divider />
+                        <FlatList
+                            data={this.props.actividades.actividades}
+                            renderItem={renderActividadItem}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                    </Card>
+                </ScrollView>
+            );
+        }
     }
 }
 
