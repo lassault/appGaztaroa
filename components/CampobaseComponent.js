@@ -12,10 +12,11 @@ import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
 import { fetchCabeceras, fetchActividades, fetchExcursiones, fetchComentarios } from '../redux/ActionCreators';
 import Home from './HomeComponent';
 import Calendario from './CalendarioComponent';
-import DetalleExcursion from './DetalleExcursionComponent';
 import Contacto from './ContactoComponent';
-import QuienesSomos from './QuienesSomosComponent';
+import DetalleExcursion from './DetalleExcursionComponent';
+import ExcursionesFavoritas from './VistaFavoritosComponent';
 import PruebaEsfuerzo from './PruebaEsfuerzoComponent';
+import QuienesSomos from './QuienesSomosComponent';
 
 const mapStateToProps = state => {
     return {
@@ -57,11 +58,11 @@ function DrawerNavegador() {
                     )
                 }}
             />
-            <Drawer.Screen name='Quienes somos' component={QuienesSomosNavegador} 
+            <Drawer.Screen name='Calendario' component={CalendarioNavegador} 
                 options={{
                     drawerIcon: ({ tintColor }) => (
                         <Icon
-                            name='info-circle'
+                            name='calendar'
                             type='font-awesome'
                             size={22}
                             color={tintColor}
@@ -69,11 +70,23 @@ function DrawerNavegador() {
                     )
                 }}
             />
-            <Drawer.Screen name='Calendario' component={CalendarioNavegador} 
+            <Drawer.Screen name='Excursiones favoritas' component={ExcursionesFavoritasNavegador}
                 options={{
                     drawerIcon: ({ tintColor }) => (
                         <Icon
-                            name='calendar'
+                            name='thumbs-up'
+                            type='font-awesome'
+                            size={22}
+                            color={tintColor}
+                        />
+                    )
+                }}
+            />
+            <Drawer.Screen name='Prueba de esfuerzo' component={PruebaEsfuerzoNavegador}
+                options={{
+                    drawerIcon: ({ tintColor }) => (
+                        <Icon
+                            name='heartbeat'
                             type='font-awesome'
                             size={22}
                             color={tintColor}
@@ -93,11 +106,11 @@ function DrawerNavegador() {
                     )
                 }}
             />
-            <Drawer.Screen name='Prueba de esfuerzo' component={PruebaEsfuerzoNavegador}
+            <Drawer.Screen name='Quienes somos' component={QuienesSomosNavegador} 
                 options={{
                     drawerIcon: ({ tintColor }) => (
                         <Icon
-                            name='address-card'
+                            name='info-circle'
                             type='font-awesome'
                             size={22}
                             color={tintColor}
@@ -244,6 +257,29 @@ function PruebaEsfuerzoNavegador({ navigation }) {
                 component={PruebaEsfuerzo}
                 options={{
                     title: 'Prueba de esfuerzo'
+                }}
+            />
+        </Stack.Navigator>
+    )
+}
+
+function ExcursionesFavoritasNavegador ({ navigation }) {
+    return (
+        <Stack.Navigator
+            initialRouteName='ExcursionesFavoritas'
+            headerMode='screen'
+            screenOptions={{
+                headerTintColor: '#fff',
+                headerStyle: { backgroundColor: colorGaztaroaOscuro},
+                headerTitleStyle: { color: '#fff' },
+                headerLeft: () => (<Icon name='menu' size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />)
+            }}
+        >
+            <Stack.Screen
+                name='ExcursionesFavoritas'
+                component={ExcursionesFavoritas}
+                options={{
+                    title: 'ExcursionesFavoritas'
                 }}
             />
         </Stack.Navigator>
