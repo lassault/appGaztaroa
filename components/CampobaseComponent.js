@@ -266,7 +266,7 @@ function PruebaEsfuerzoNavegador({ navigation }) {
 function ExcursionesFavoritasNavegador ({ navigation }) {
     return (
         <Stack.Navigator
-            initialRouteName='ExcursionesFavoritas'
+            initialRouteName='Excursiones Favoritas'
             headerMode='screen'
             screenOptions={{
                 headerTintColor: '#fff',
@@ -276,10 +276,10 @@ function ExcursionesFavoritasNavegador ({ navigation }) {
             }}
         >
             <Stack.Screen
-                name='ExcursionesFavoritas'
+                name='Excursiones Favoritas'
                 component={ExcursionesFavoritas}
                 options={{
-                    title: 'ExcursionesFavoritas'
+                    title: 'Excursiones Favoritas'
                 }}
             />
         </Stack.Navigator>

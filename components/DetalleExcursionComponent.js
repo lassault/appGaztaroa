@@ -3,7 +3,7 @@ import { Text, View, ScrollView, FlatList, StyleSheet, Modal } from 'react-nativ
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { postFavorito, postComentario } from '../redux/ActionCreators';
-import { baseUrl, colorGaztaroaOscuro } from '../comun/comun';
+import { colorGaztaroaOscuro } from '../comun/comun';
 
 const mapStateToProps = state => {
     return {
@@ -129,8 +129,7 @@ class DetalleExcursion extends Component {
     }
 
     gestionarComentario (excursionId) {
-        console.log(excursionId, this.state.valoracion, this.state.autor, this.state.comentario);
-        this.props.postComentario(excursionId, this.state.valoracion, this.state.autor, this.state.comentario);
+        this.props.postComentario(excursionId, Math.trunc(this.state.valoracion), this.state.autor, this.state.comentario);
         this.resetearModal();
     }
 

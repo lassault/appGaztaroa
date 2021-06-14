@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text, ScrollView, FlatList } from 'react-native';
 import { Card, ListItem, Avatar } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { baseUrl } from '../comun/comun';
 
 import { IndicadorActividad } from './IndicadorActividadComponent';
 
