@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, FlatList, View } from 'react-native';
+import { Alert, FlatList, View, Text } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
 
@@ -59,7 +59,7 @@ class VistaFavoritos extends Component {
                         onPress={() => navigate('DetalleExcursion', { excursionId: item.id })}
                         bottomDivider
                     >
-                        <Avatar source={{uri: baseUrl + item.imagen}} />
+                        <Avatar source={{uri: item.imagen}} />
                         <ListItem.Content>
                             <ListItem.Title>
                                 {item.nombre}

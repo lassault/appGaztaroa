@@ -25,7 +25,7 @@ function RenderExcursion (props) {
     if (excursion != null) {
         return (
             <Card>
-                <Card.Image source={{uri: baseUrl + excursion.imagen}}>
+                <Card.Image source={{uri: excursion.imagen}}>
                     <Card.Title style={StyleSheet.cardTitleStyle}>{excursion.nombre}</Card.Title>
                 </Card.Image>
                 <Text style={{margin: 10}}>

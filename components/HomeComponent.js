@@ -32,7 +32,7 @@ function RenderItem (props) {
         if (item != null) {
             return (
                 <Card>
-                    <Card.Image source={{uri: baseUrl + item.imagen}}>
+                    <Card.Image source={{uri: item.imagen}}>
                         <Card.Title style={styles.cardTitleStyle}>{item.nombre}</Card.Title>
                     </Card.Image>
                     <Text style={{margin: 20}}>
