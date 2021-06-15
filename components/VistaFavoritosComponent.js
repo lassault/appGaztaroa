@@ -5,8 +5,7 @@ import Swipeout from 'react-native-swipeout';
 
 import IndicadorActividad from './IndicadorActividadComponent';
 import { connect } from 'react-redux';
-import { baseUrl } from '../comun/comun';
-import { borrarFavorito } from '../redux/ActionCreators';
+import { borrarFavorito, postFavorito, postComentario } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -41,8 +40,8 @@ class VistaFavoritos extends Component {
 
     render() {
         
-        const { navigate } = this.props.navigation;
-        const renderFavoritoItem = ({ item, index }) => {
+        const renderFavoritosItem = ({ item, index }) => {
+            const { navigate } = this.props.navigation;
             
             const rightButton = [
                 {
@@ -57,6 +56,7 @@ class VistaFavoritos extends Component {
                     <ListItem
                         key={index}
                         onPress={() => navigate('DetalleExcursion', { excursionId: item.id })}
+                        onLongPress={() => this.mensajeAlert(item)}
                         bottomDivider
                     >
                         <Avatar source={{uri: item.imagen}} />
@@ -96,7 +96,7 @@ class VistaFavoritos extends Component {
                 return (
                     <FlatList
                         data={favorito}
-                        renderItem={renderFavoritoItem}
+                        renderItem={renderFavoritosItem}
                         keyExtractor={item => item.id.toString()}
                     />
                 )

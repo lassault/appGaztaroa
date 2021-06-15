@@ -14,9 +14,9 @@ import Home from './HomeComponent';
 import Calendario from './CalendarioComponent';
 import Contacto from './ContactoComponent';
 import DetalleExcursion from './DetalleExcursionComponent';
-import ExcursionesFavoritas from './VistaFavoritosComponent';
 import PruebaEsfuerzo from './PruebaEsfuerzoComponent';
 import QuienesSomos from './QuienesSomosComponent';
+import VistaFavoritos from './VistaFavoritosComponent';
 
 const mapStateToProps = state => {
     return {
@@ -266,7 +266,7 @@ function PruebaEsfuerzoNavegador({ navigation }) {
 function ExcursionesFavoritasNavegador ({ navigation }) {
     return (
         <Stack.Navigator
-            initialRouteName='Excursiones Favoritas'
+            initialRouteName='ExcursionesFavoritas'
             headerMode='screen'
             screenOptions={{
                 headerTintColor: '#fff',
@@ -276,15 +276,24 @@ function ExcursionesFavoritasNavegador ({ navigation }) {
             }}
         >
             <Stack.Screen
-                name='Excursiones Favoritas'
-                component={ExcursionesFavoritas}
+                name='ExcursionesFavoritas'
+                component={VistaFavoritos}
                 options={{
                     title: 'Excursiones Favoritas'
+                }}
+            />
+
+            <Stack.Screen
+                name='DetalleExcursion'
+                component={DetalleExcursion}
+                options={{
+                    title: 'Detalle Excursión'
                 }}
             />
         </Stack.Navigator>
     )
 }
+
 class Campobase extends Component {
 
     componentDidMount() {

@@ -155,8 +155,6 @@ export const addFavorito = (excursionId) => ({
 
 export const postComentario = (excursionId, valoracion, autor, comentario) => (dispatch) => {
     let dia = new Date().toISOString();
-    console.log(excursionId);
-    console.log(dia);
     setTimeout(() => {
         dispatch(addComentario(excursionId, valoracion, autor, comentario, dia));
     }, 2000);
